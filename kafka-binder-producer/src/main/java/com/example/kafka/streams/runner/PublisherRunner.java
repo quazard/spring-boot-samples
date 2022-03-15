@@ -26,7 +26,6 @@ public class PublisherRunner implements ApplicationRunner {
             i -> this.kafkaStreamOutput
                 .binderSupplier(KafkaStreamOutput.SAMPLE_OUT, "content " + i)
         )
-        .take(Duration.ofSeconds(10))
         .subscribe();
   }
 
