@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        sampleConsumer-in-0:
+          destination: sample-topic
+          group: sample-consumer-0
+          binder: kafka
+          consumer:
+            ackMode: RECORD
+            startOffset: latest
+      kafka:
+        binder:
+          autoCreateTopics: false
+          brokers:
+            - localhost:9092
+          configuration:
+            security.protocol: PLAINTEXT

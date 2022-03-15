@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        sample-out:
+          destination: sample-topic
+          producer:
+            binder: kafka
+            contentType: application/json
+      kafka:
+        binder:
+          autoCreateTopics: true
+          brokers:
+            - localhost:9092
+          configuration:
+            security.protocol: PLAINTEXT
+#        bindings:
+#          sample-out:
+#            producer:
+#              configuration:
+#                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+#                value.serializer: org.apache.kafka.common.serialization.StringSerializer
