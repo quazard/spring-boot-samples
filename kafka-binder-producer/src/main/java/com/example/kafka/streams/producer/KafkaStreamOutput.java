@@ -19,7 +19,7 @@ public class KafkaStreamOutput {
     this.streamBridge = streamBridge;
   }
 
-  public <T>Mono<Boolean> binderSupplier(
+  public <T> Mono<Boolean> binderSupplier(
       final String binder,
       final T payload
   ) {
