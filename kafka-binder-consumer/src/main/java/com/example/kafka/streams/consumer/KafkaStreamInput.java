@@ -15,9 +15,16 @@ public class KafkaStreamInput {
   @Bean
   public Consumer<Flux<Message<String>>> sampleConsumer() {
     return flux -> flux
-        .doOnEach(m -> log.info("incoming event"))
         .map(Message::getPayload)
-        .doOnNext(s -> log.info("content: {}", s))
+        .doOnNext(s -> log.info("SampleConsumer | content: {}", s))
+        .subscribe();
+  }
+
+  @Bean
+  public Consumer<Flux<Message<String>>> sampleSeekConsumer() {
+    return flux -> flux
+        .map(Message::getPayload)
+        .doOnNext(s -> log.info("SampleSeekConsumer | content: {}", s))
         .subscribe();
   }
 

@@ -21,7 +21,8 @@ public class PublisherRunner implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) {
-    Flux.range(1, 40)
+    Flux.range(1, 10)
+        .delayElements(Duration.ofSeconds(1))
         .flatMap(
             i -> this.kafkaStreamOutput
                 .binderSupplier(KafkaStreamOutput.SAMPLE_OUT, "content " + i)
