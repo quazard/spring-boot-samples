@@ -4,6 +4,7 @@ import com.example.demo.model.Person;
 import com.example.demo.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 public class ResourceService {
@@ -17,8 +18,8 @@ public class ResourceService {
   }
 
   public Flux<Person> findAllPersons() {
-    // Blocking IO, look for new JPA 2.2 spec
-    return Flux.fromIterable(personRepository.findAll());
+    return Flux.fromIterable(personRepository.findAll())
+        .subscribeOn(Schedulers.boundedElastic());
   }
 
 }
