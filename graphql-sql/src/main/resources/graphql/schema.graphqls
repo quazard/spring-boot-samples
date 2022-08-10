@@ -1,5 +1,6 @@
 type Query {
-    persons(id: ID, name: String): [Person]
+    allPersons: [Person]
+    person(id: ID!): Person
 }
 
 type Person {

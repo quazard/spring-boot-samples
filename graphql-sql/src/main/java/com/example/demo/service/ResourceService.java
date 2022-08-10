@@ -5,6 +5,7 @@ import com.example.demo.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResourceService {
@@ -19,6 +20,10 @@ public class ResourceService {
 
   public List<Person> findAllPersons() {
     return personRepository.findAll();
+  }
+
+  public Optional<Person> findById(Integer id){
+    return personRepository.findById(id);
   }
 
 }
