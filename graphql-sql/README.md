@@ -5,3 +5,4 @@ Sample implementing Spring GraphQL 1.0.x and H2 for SQL db. Access [GraphiQL int
 ### References
 
 * [Spring GraphQL blog post](https://www.danvega.dev/blog/2022/05/17/spring-for-graphql/) from Dan Vega
+* [Official Spring GraphQL documentation](https://docs.spring.io/spring-graphql/docs/current/reference/html/#testing)
