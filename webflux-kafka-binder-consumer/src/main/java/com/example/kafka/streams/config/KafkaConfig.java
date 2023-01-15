@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -47,23 +48,21 @@ public class KafkaConfig {
                     )
             )
             .map(consumer::offsetsForTimes)
-            .flatMap(
-                m -> m.entrySet()
-                    .stream()
-                    .peek(
-                        entrySet -> log.info(
-                            "Seek config on binder {} to topic {} partition {} offset {}",
-                            bindingName,
-                            entrySet.getKey().topic(),
-                            entrySet.getKey().partition(),
-                            entrySet.getValue().offset()
-                        )
-                    )
-                    .peek(
-                        entrySet -> consumer.seek(entrySet.getKey(), entrySet.getValue().offset())
-                    )
-            )
-            .toList();
+            .map(Map::entrySet)
+            .flatMap(Collection::stream)
+            .forEach(
+                entrySet -> {
+                  log.info(
+                      "Seek config on binder {} to topic {} partition {} offset {}",
+                      bindingName,
+                      entrySet.getKey().topic(),
+                      entrySet.getKey().partition(),
+                      entrySet.getValue().offset()
+                  );
+
+                  consumer.seek(entrySet.getKey(), entrySet.getValue().offset());
+                }
+            );
       }
 
     };
